@@ -1,0 +1,5 @@
+A simple implementation of the Vigenere cipher in python.  
+
+This is designed to give one an easy way to generate per-site
+passwords while only remembering one or two master passwords.  
+
