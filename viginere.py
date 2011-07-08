@@ -47,7 +47,7 @@ def decipher(ciphertext, key):
     return viginere(key, ciphertext, code_sub)
 
 def usage():
-    print("usage: ./viginere.py [-n length] text key [key2, key3, ...]")
+    print("usage: ./viginere.py [-n length] key [key2, key3, ...] text")
 
 # Main logic
 if len(argv) < 3:
@@ -56,14 +56,14 @@ if len(argv) < 3:
 
 args = argv[1:]
 length = None
-oplist, args = getopt(args,'n:','--length')
+oplist, args = getopt(args,'n:')
 for opt, arg in oplist:
-    if opt in ('-n','--length'):
+    if opt in ('-n'):
         length = int(arg)
 
 length = max(map(len,args)) if (length == None) else length
 
 
 print("     " + length * '_')
-print("enc: " + reduce(cipher, args))
-print("dec: " + reduce(decipher, reversed(args)))
+print("enc: " + reduce(cipher, args)[:length])
+print("dec: " + reduce(decipher, reversed(args))[:length])
