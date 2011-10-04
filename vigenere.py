@@ -11,6 +11,7 @@ except:
 
 from sys import argv
 from getopt import getopt
+from getpass import getpass
 
 low_code = ord(' ')
 high_code = ord('~')
@@ -47,10 +48,10 @@ def decipher(ciphertext, key):
     return viginere(key, ciphertext, code_sub)
 
 def usage():
-    print("usage: ./viginere.py [-n length] key [key2, key3, ...] text")
+    print("usage: ./viginere.py [-n length] [key2, key3, ...] text")
 
 # Main logic
-if len(argv) < 3:
+if len(argv) < 2:
     usage()
     exit(-1)
 
@@ -61,9 +62,11 @@ for opt, arg in oplist:
     if opt in ('-n'):
         length = int(arg)
 
+# Get the password!
+key = getpass("Key:")
+args.insert(0, key)
+
 length = max(map(len,args)) if (length == None) else length
-
-
 print("     " + length * '_')
 print("enc: " + reduce(cipher, args)[:length])
 print("dec: " + reduce(decipher, reversed(args))[:length])
